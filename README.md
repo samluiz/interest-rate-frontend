@@ -1,13 +1,58 @@
-# InterestRateFrontend
+# SAURS - DASFN
 
-Single Page Application desenvolvida com Angular 15 consumindo minha [API](https://github.ibm.com/samuelluiz/interest-rate-api) de taxa de juros mensal.
+Single Page Application developed with Angular 15 performing CRUD operations on my interest rate [API](https://github.com/samluiz/interest-rate-api).
 
-<img width="1438" alt="image" src="https://media.github.ibm.com/user/416508/files/21d2e9ca-0e2d-401a-9bc5-4234d0720e7c">
+### Clone project
 
-## Servidor de desenvolvimento
+  ```
+  git clone https://github.com/samluiz/https://github.com/samluiz/interest-rate-frontend
+  ```
+  
+### Enter in the project folder
 
-Rode `ng serve` para subir o servidor de desenvolvimento. Acesse `http://localhost:4200/` para ver as mudanças que fizer.
+  ```
+  cd TodoApp-Angular-Frontend
+  ```
 
-## Build
+### Install the dependencies
 
-Rode `ng build` para fazer a build do projeto.
+  ```
+  npm install
+  ```
+
+### Start the server
+
+  ```
+  ng serve
+  ```
+---------------
+
+# SAURS - DASFN
+
+Single Page Application desenvolvida com Angular 15 consumindo minha [API](https://github.com/samluiz/interest-rate-api) de taxa de juros mensal.
+
+### Clone o projeto
+
+  ```
+  git clone https://github.com/samluiz/https://github.com/samluiz/interest-rate-frontend
+  ```
+  
+### Entre no diretório do projeto
+
+  ```
+  cd TodoApp-Angular-Frontend
+  ```
+
+### Instale as dependências
+
+  ```
+  npm install
+  ```
+
+### Inicie o servidor
+
+  ```
+  ng serve
+  ```
+
+----------------
