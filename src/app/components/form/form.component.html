@@ -1,0 +1,121 @@
+<form [formGroup]="group" (ngSubmit)="onSubmit()" #regForm="ngForm">
+  <div class="container">
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="instituicao">Instituição financeira: </mat-label>
+      <input
+        matInput
+        id="instituicao"
+        type="text"
+        formControlName="instituicao_financeira"
+        required
+      />
+      <mat-error
+        *ngIf="instituicao_financeira && instituicao_financeira.invalid"
+        >{{ notNullError }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="cnpj">CNPJ: </mat-label>
+      <input
+        matInput
+        id="cnpj"
+        type="text"
+        formControlName="cnpj_8"
+        maxlength="8"
+        required
+      />
+      <mat-error *ngIf="cnpj_8 && cnpj_8.invalid">{{
+        getCnpjErrorMessage()
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="modalidade">Modalidade: </mat-label>
+      <input
+        matInput
+        id="modalidade"
+        type="text"
+        formControlName="modalidade"
+        required
+      />
+      <mat-error *ngIf="modalidade && modalidade.invalid">{{
+        notNullError
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="posicao">Posição: </mat-label>
+      <input
+        matInput
+        id="posicao"
+        type="text"
+        formControlName="posicao"
+        required
+      />
+      <mat-error *ngIf="posicao && posicao.invalid">{{
+        notNullError
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="taxa_ano">Taxa de juros ao ano: </mat-label>
+      <input
+        matInput
+        id="taxa_ano"
+        type="text"
+        formControlName="taxa_juros_ao_ano"
+        required
+      />
+      <mat-error *ngIf="taxa_juros_ao_ano && taxa_juros_ao_ano.invalid">{{
+        notNullError
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="taxa_mes">Taxa de juros ao mês: </mat-label>
+      <input
+        matInput
+        id="taxa_mes"
+        type="text"
+        formControlName="taxa_juros_ao_mes"
+        required
+      />
+      <mat-error *ngIf="taxa_juros_ao_mes && taxa_juros_ao_mes.invalid">{{
+        notNullError
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="mes">Mês: </mat-label>
+      <input
+        matInput
+        id="mes"
+        type="text"
+        formControlName="mes"
+        required
+        maxlength="8"
+      />
+      <mat-error *ngIf="mes && mes.invalid">{{
+        getMesErrorMessage()
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="field" appearance="fill">
+      <mat-label for="ano_mes">Ano-mês (yyyy-mm): </mat-label>
+      <input
+        matInput
+        id="ano_mes"
+        type="text"
+        formControlName="ano_mes"
+        required
+        maxlength="7"
+      />
+      <mat-error *ngIf="ano_mes && ano_mes.invalid">{{
+        getAnoMesErrorMessage()
+      }}</mat-error>
+    </mat-form-field>
+    <div class="btn-wrap">
+      <button mat-stroked-button color="basic" type="submit">ENVIAR</button>
+    </div>
+  </div>
+</form>

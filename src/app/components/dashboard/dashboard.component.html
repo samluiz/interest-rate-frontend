@@ -1,0 +1,54 @@
+ <div class="overlay" *ngIf="isEdit || isDelete" ></div>
+ <app-sidebar />
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Instituição financeira</th>
+          <th>Modalidade</th>
+          <th>CNPJ 8</th>
+          <th>Posição</th>
+          <th>Taxa de juros/mês</th>
+          <th>Taxa de juros/ano</th>
+          <th>Mês</th>
+          <th>Ano-mês</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let op of data | 
+        paginate: {
+          itemsPerPage: size,
+          currentPage: page,
+          totalItems: totalItems - 10
+        }; let i = index">
+          <td>{{ op.instituicao_financeira }}</td>
+          <td>{{ op.modalidade }}</td>
+          <td>{{ op.cnpj_8 }}</td>
+          <td>{{ op.posicao }}</td>
+          <td>{{ op.taxa_juros_ao_mes }}</td>
+          <td>{{ op.taxa_juros_ao_ano }}</td>
+          <td>{{ op.mes }}</td>
+          <td>{{ op.ano_mes }}</td>
+          <td><button 
+            class="btn" (click)="toggleEditModal(op.uuid, i)"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></button></td>
+          <td><button 
+            class="btn" (click)="toggleDeleteModal(op.uuid, i)" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button></td>
+        </tr>
+      </tbody>
+      <tr></tr>
+    </table>
+    <div class="center">
+      <pagination-controls
+      (pageChange)="renderPage($event)"
+      previousLabel="Anterior"
+      nextLabel="Próximo"
+      screenReaderPaginationLabel="Páginas"
+      screenReaderPageLabel="Página"
+      screenReaderCurrentLabel="Você está na página">
+      </pagination-controls>
+    </div>
+  </main>
+  <app-modal *ngIf="isModalOpen" (close)="closeModal($event)">
+    <app-edit-form *ngIf="isEdit" (submit)="onUpdate($event)" />
+    <app-delete *ngIf="isDelete" (submit)="onDelete($event)" (close)="closeModal($event)" />
+  </app-modal>

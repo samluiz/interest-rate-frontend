@@ -1,0 +1,19 @@
+.wrapper {
+  display: grid;
+  place-items: center;
+  grid-auto-flow: row;
+  height: 100%;
+  padding: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.btn-wrap {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  grid-auto-flow: column;
+  place-self: start center;
+}

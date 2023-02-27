@@ -1,0 +1,81 @@
+.overlay {
+  position: absolute;
+  z-index: 14;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+}
+
+button {
+  all: unset;
+  float: right;
+  padding: 5px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+  color: rgb(45, 45, 45);
+  background: rgb(199, 199, 199);
+  border-radius: 50%;
+}
+
+.container {
+  height: 100%;
+}
+
+main {
+  padding: 3rem;
+  margin-left: 5%;
+}
+
+table {
+  width: 100%;
+  margin: auto;
+  font-size: smaller;
+}
+
+tbody {
+  height: 0.2rem;
+}
+
+table td {
+  padding: 0.4rem;
+  height: 0.1rem;
+}
+
+table thead td {
+  background-color: #54585d;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  border: 1px solid #54585d;
+}
+
+table tbody td {
+  color: #636363;
+  border: 1px solid #dddfe1;
+}
+table tbody tr {
+  background-color: #f9fafb;
+  height: 1rem;
+  height: max-content;
+}
+table tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+  height: auto;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -5%;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  background-color: rgb(237, 237, 237);
+  z-index: 1;
+}
