@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
@@ -20,13 +27,13 @@ export class DashboardComponent implements OnInit {
     this.changed = new URL(this.url).searchParams.get('changed') === 'true';
   }
 
-  ngOnInit(): void {
-    this.findAll();
-    if (this.changed) {
-      this.openSnackBar();
-    }
-  }
-
+  data: Array<any> = [];
+  totalPages: number = 0;
+  totalItems: number = 0;
+  size: number = 10;
+  page: number = 0;
+  anoMes: string = '';
+  anoMesInput = new FormControl('');
   url: string;
   changed: boolean = false;
   uuid: string = '';
@@ -34,6 +41,23 @@ export class DashboardComponent implements OnInit {
   isEdit: boolean = false;
   isDelete: boolean = false;
   isModalOpen: boolean = false;
+
+  ngOnInit(): void {
+    this.fetchData();
+    if (this.changed) {
+      this.openSnackBar();
+    }
+  }
+
+  onInputChange(event: string) {
+    if (event && event.length === 7 && event.match('\\d{4}-\\d{2}')) {
+      this.anoMes = event;
+      this.fetchData();
+    } else {
+      this.anoMes = '';
+      this.fetchData();
+    }
+  }
 
   reloadPage() {
     if (new URL(this.url).searchParams.has('changed')) {
@@ -61,32 +85,22 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  toggleEditModal(uuid: string, index: number) {
+  toggleEditModal(uuid: string) {
     this.isModalOpen = true;
     this.isEdit = true;
     this.uuid = uuid;
-    this.index = index;
     this.click.sendUUID(uuid);
     this.type.sendType(this.isEdit);
   }
 
-  toggleDeleteModal(uuid: string, index: number) {
+  toggleDeleteModal(uuid: string) {
     this.isModalOpen = true;
     this.isDelete = true;
     this.uuid = uuid;
-    this.index = index;
     this.click.sendUUID(uuid);
   }
 
-  updated: any = {};
-  data: Array<any> = [];
-  totalPages: number = 0;
-  totalItems: number = 0;
-  size: number = 10;
-  page: number = 0;
-  anoMes: string = '';
-
-  findAll() {
+  fetchData() {
     this.service.findAll(this.size, this.page, this.anoMes).subscribe({
       next: (data: any) => {
         this.data = data.results;
@@ -99,11 +113,11 @@ export class DashboardComponent implements OnInit {
 
   renderPage(event: number) {
     this.page = event;
-    this.findAll();
+    this.fetchData();
   }
 
   openSnackBar() {
-    this.snackBar.open('Registro removido com sucesso.', 'Fechar', {
+    this.snackBar.open('Operação concluída com sucesso.', 'Fechar', {
       duration: 3000,
     });
   }

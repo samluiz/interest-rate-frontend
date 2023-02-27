@@ -27,7 +27,7 @@ export class AddFormComponent {
   }
 
   openSnackBar() {
-    this.snackBar.open('Registro enviado com sucesso.', 'Fechar', {
+    this.snackBar.open('Registro salvo com sucesso.', 'Fechar', {
       duration: 3000,
     });
   }

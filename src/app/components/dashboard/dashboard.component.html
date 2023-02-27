@@ -1,6 +1,12 @@
- <div class="overlay" *ngIf="isEdit || isDelete" ></div>
+ <div class="overlay" *ngIf="isModalOpen" ></div>
  <app-sidebar />
   <main>
+    <div class="position-slide">
+      <div class="search">
+        <mat-slide-toggle #slider>Filtrar por ano-mês?</mat-slide-toggle>
+        <input ngModel name="anoMesInput" (ngModelChange)="onInputChange($event)" type="text" disabled="{{!slider.checked}}" class="input-ano-mes" placeholder="ex: 2022-12">
+      </div>
+    </div>
     <table>
       <thead>
         <tr>
@@ -30,9 +36,9 @@
           <td>{{ op.mes }}</td>
           <td>{{ op.ano_mes }}</td>
           <td><button 
-            class="btn" (click)="toggleEditModal(op.uuid, i)"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></button></td>
+            class="btn" (click)="toggleEditModal(op.uuid)"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></button></td>
           <td><button 
-            class="btn" (click)="toggleDeleteModal(op.uuid, i)" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button></td>
+            class="btn" (click)="toggleDeleteModal(op.uuid)" ><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button></td>
         </tr>
       </tbody>
       <tr></tr>
