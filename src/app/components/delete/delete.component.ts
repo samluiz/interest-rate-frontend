@@ -28,13 +28,12 @@ export class DeleteComponent {
 
   delete(uuid: string) {
     this.service.delete(uuid).subscribe({
-      // next: () => window.location.reload(),
       error: (e) => console.error(e),
     });
   }
 
   onSubmit() {
-    this.click.getClickEvent().subscribe((uuid) => {
+    this.click.getUUID().subscribe((uuid) => {
       this.uuid = uuid;
     });
     this.delete(this.uuid);

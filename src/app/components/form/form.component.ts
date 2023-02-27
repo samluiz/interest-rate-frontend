@@ -2,26 +2,33 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
+import { FormTypeService } from 'src/app/services/form-type.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss'],
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   constructor(
     private builder: FormBuilder,
     private service: ApiService,
-    private click: GetUUIDService
+    private click: GetUUIDService,
+    private type: FormTypeService
   ) {}
 
-  selected!: string;
+  ngOnInit(): void {
+    this.populateForm();
+  }
+
+  isEdit: boolean = false;
 
   @ViewChild('regForm', { static: false })
   form!: NgForm;
@@ -137,10 +144,26 @@ export class FormComponent {
     }
   }
 
-  findByUUID(uuid: string) {
+  getFormType(): boolean {
+    this.type.getType().subscribe((type) => {
+      this.isEdit = type;
+    });
+    return this.isEdit;
+  }
+
+  populateForm() {
+    if (this.getFormType()) {
+      this.click.getUUID().subscribe((uuid) => {
+        this.findByUUID(uuid);
+      });
+    }
+  }
+
+  findByUUID(uuid: string): any {
     this.service.findByUUID(uuid).subscribe({
-      next: (data) => {
-        return data;
+      next: (data: any) => {
+        let { uuid, _links, ...rest } = data;
+        this.group.setValue(rest);
       },
       error: (e) => console.log(e),
     });

@@ -39,7 +39,7 @@ export class EditFormComponent {
 
   onSubmit(data: any) {
     if (data.instituicao_financeira) {
-      this.click.getClickEvent().subscribe((uuid) => {
+      this.click.getUUID().subscribe((uuid) => {
         this.uuid = uuid;
       });
       this.update(this.uuid, data);

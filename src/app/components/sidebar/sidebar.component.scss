@@ -9,7 +9,16 @@
   top: 0;
   z-index: 2;
   background-color: rgb(237, 237, 237);
-  transition-duration: 0.2s;
+  transition-duration: 0.5s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .content {
@@ -40,18 +49,21 @@ i:hover {
   grid-auto-flow: column;
   gap: 1rem;
   border-radius: 5px;
-}
 
-.icon {
-  width: 2rem;
-  height: 2rem;
-  display: grid;
+  span {
+    font-size: 12px;
+    animation: fadeIn 0.5s;
+    animation-fill-mode: forwards;
+  }
 }
 
 .overlay {
   position: absolute;
   z-index: 1;
   height: 100%;
+  visibility: hidden;
+  opacity: 0;
   width: 100%;
+  transition-duration: 0.2s;
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
 }

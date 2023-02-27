@@ -10,11 +10,11 @@ export class GetUUIDService {
   private subject = new BehaviorSubject<string>('');
   private uuid!: Observable<unknown>;
 
-  sendClickEvent(uuid: string) {
+  sendUUID(uuid: string) {
     this.subject.next(uuid);
   }
 
-  getClickEvent(): Observable<any> {
+  getUUID(): Observable<any> {
     this.uuid = new Observable((observer) => {
       observer.next(this.subject.getValue());
       observer.complete();

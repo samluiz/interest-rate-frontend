@@ -1,11 +1,15 @@
-<div class="overlay" *ngIf="isOpen"></div>
+<div
+  class="overlay"
+  [style.opacity]="opacity"
+  [style.visibility]="visibility"
+></div>
 <div class="sidebar" [style.width]="width">
   <div class="content">
     <div class="wrapper">
       <button mat-mini-fab color="basic" class="btn" [routerLink]="'/'">
         <i class="fa fa-university fa-lg" aria-hidden="true"></i>
       </button>
-      <span *ngIf="isOpen" [style.font-size]="fontSize">IBM DASFN</span>
+      <span *ngIf="isOpen">IBM DASFN</span>
     </div>
 
     <div class="links">
@@ -20,7 +24,7 @@
             <i class="fa fa-list fa-lg" aria-hidden="true"></i>
           </button>
         </div>
-        <span *ngIf="isOpen" [style.font-size]="fontSize">LISTAR</span>
+        <span *ngIf="isOpen">LISTAR</span>
       </div>
       <div class="wrapper">
         <div class="icon">
@@ -33,7 +37,7 @@
             <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i>
           </button>
         </div>
-        <span *ngIf="isOpen" [style.font-size]="fontSize">ADICIONAR</span>
+        <span *ngIf="isOpen">ADICIONAR</span>
       </div>
     </div>
     <button mat-mini-fab color="basic" class="btn" (click)="toggleSidebar()">

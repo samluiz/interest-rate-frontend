@@ -10,18 +10,22 @@ export class SidebarComponent {
   width: string = '';
   transform: string = '';
   fontSize: string = '';
+  opacity: string = '';
+  visibility: string = '';
 
   toggleSidebar() {
     if (!this.isOpen) {
       this.isOpen = true;
       this.width = '20%';
       this.transform = 'rotate(180deg)';
-      this.fontSize = '12px';
+      this.opacity = '1';
+      this.visibility = 'visible';
     } else {
       this.isOpen = false;
       this.width = '';
       this.transform = '';
-      this.fontSize = '';
+      this.opacity = '';
+      this.visibility = '';
     }
   }
 }

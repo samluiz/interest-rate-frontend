@@ -17,7 +17,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddFormComponent } from './components/add-form/add-form.component';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { ModalComponent } from './components/modal/modal.component';
@@ -47,7 +46,6 @@ import { DeleteComponent } from './components/delete/delete.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatDividerModule,
     MatSnackBarModule,
     RouterModule.forRoot([
       { path: 'listar', component: ListComponent },

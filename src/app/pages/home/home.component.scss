@@ -1,11 +1,33 @@
 .container {
   padding: 1rem;
-  margin-left: 5%;
   display: grid;
   place-items: center;
-  gap: 4rem;
+  gap: 5rem;
 
   h3 {
     width: 36rem;
+    z-index: 5;
   }
+
+  i {
+    margin-top: 1rem;
+    cursor: pointer;
+    transition-duration: 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.wave-bottom {
+  position: absolute;
+  bottom: 0;
 }
