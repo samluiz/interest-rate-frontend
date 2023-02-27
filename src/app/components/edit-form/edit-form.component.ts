@@ -1,11 +1,7 @@
 import {
-  AfterViewChecked,
   Component,
   EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
+  Output
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';

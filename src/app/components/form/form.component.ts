@@ -1,10 +1,9 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnInit,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';

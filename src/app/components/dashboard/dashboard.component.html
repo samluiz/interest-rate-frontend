@@ -3,8 +3,8 @@
   <main>
     <div class="position-slide">
       <div class="search">
-        <mat-slide-toggle #slider>Filtrar por ano-mês?</mat-slide-toggle>
-        <input ngModel name="anoMesInput" (ngModelChange)="onInputChange($event)" type="text" disabled="{{!slider.checked}}" class="input-ano-mes" placeholder="ex: 2022-12">
+        <mat-slide-toggle (click)="uncheck()" [(ngModel)]="isChecked" #slider>Filtrar por ano-mês?</mat-slide-toggle>
+        <input ngModel name="anoMesInput" value="{{slider.checked ? anoMesInput.value : anoMesInput.setValue('')}}" (ngModelChange)="onInputChange($event)" type="text" disabled="{{!slider.checked}}" class="input-ano-mes" placeholder="ex: 2022-12">
       </div>
     </div>
     <table>

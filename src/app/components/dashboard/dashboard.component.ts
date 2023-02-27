@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
@@ -22,19 +22,22 @@ export class DashboardComponent implements OnInit {
   }
 
   data: Array<any> = [];
+  anoMesInput = new FormControl('');
   totalPages: number = 0;
   totalItems: number = 0;
   size: number = 10;
   page: number = 0;
   anoMes: string = '';
-  anoMesInput = new FormControl('');
   url: string;
-  changed: boolean = false;
   uuid: string = '';
   index: number = 0;
+  changed: boolean = false;
   isEdit: boolean = false;
   isDelete: boolean = false;
   isModalOpen: boolean = false;
+
+  @Input()
+  isChecked: boolean = false;
 
   ngOnInit(): void {
     this.fetchData();
@@ -43,13 +46,17 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  uncheck() {
+    if (!this.isChecked) {
+      this.anoMes = '';
+      this.fetchData();
+    }
+  }
+
   onInputChange(event: string) {
     if (event && event.length === 7 && event.match('\\d{4}-\\d{2}')) {
       this.anoMes = event;
       this.page = 0;
-      this.fetchData();
-    } else {
-      this.anoMes = '';
       this.fetchData();
     }
   }
