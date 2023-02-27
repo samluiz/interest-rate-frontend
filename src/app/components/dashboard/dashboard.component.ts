@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
@@ -52,6 +46,7 @@ export class DashboardComponent implements OnInit {
   onInputChange(event: string) {
     if (event && event.length === 7 && event.match('\\d{4}-\\d{2}')) {
       this.anoMes = event;
+      this.page = 0;
       this.fetchData();
     } else {
       this.anoMes = '';
