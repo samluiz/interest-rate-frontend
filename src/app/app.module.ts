@@ -12,7 +12,7 @@ import { ListComponent } from './pages/list/list.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AddComponent } from './pages/add/add.component';
 import { FormComponent } from './components/form/form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddFormComponent } from './components/add-form/add-form.component';
@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DeleteComponent } from './components/delete/delete.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -42,11 +43,13 @@ import { DeleteComponent } from './components/delete/delete.component';
     BrowserAnimationsModule,
     MatTableModule,
     NgxPaginationModule,
+    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    MatSlideToggleModule,
     RouterModule.forRoot([
       { path: 'listar', component: ListComponent },
       { path: '', component: HomeComponent },

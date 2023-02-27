@@ -1,8 +1,4 @@
-<div
-  class="overlay"
-  [style.opacity]="opacity"
-  [style.visibility]="visibility"
-></div>
+<div class="overlay" *ngIf="isOpen"></div>
 <div class="sidebar" [style.width]="width">
   <div class="content">
     <div class="wrapper">

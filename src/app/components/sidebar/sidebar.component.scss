@@ -7,7 +7,7 @@
   display: block;
   left: 0;
   top: 0;
-  z-index: 2;
+  z-index: 50;
   background-color: rgb(237, 237, 237);
   transition-duration: 0.5s;
 }
@@ -59,11 +59,10 @@ i:hover {
 
 .overlay {
   position: absolute;
-  z-index: 1;
+  z-index: 30;
   height: 100%;
-  visibility: hidden;
-  opacity: 0;
+  animation: fadeIn 0.5s;
+  animation-fill-mode: forwards;
   width: 100%;
-  transition-duration: 0.2s;
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
 }

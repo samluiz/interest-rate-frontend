@@ -3,7 +3,32 @@
   z-index: 14;
   height: 100%;
   width: 100%;
+  animation: fadeIn 0.5s;
+  animation-fill-mode: forwards;
   background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));
+}
+
+.position-slide {
+  width: 100%;
+}
+
+.search {
+  display: grid;
+  place-items: center;
+  font-size: smaller;
+  gap: 1rem;
+
+  input {
+    padding: 0.5rem;
+    border-radius: 12px;
+    border: 1px solid gray;
+    background: transparent;
+
+    &:hover,
+    &:focus {
+      outline: 1px solid black;
+    }
+  }
 }
 
 button {
@@ -20,16 +45,22 @@ button:hover {
   border-radius: 50%;
 }
 
+.input-ano-mes:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .container {
   height: 100%;
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem;
   margin-left: 5%;
 }
 
 table {
+  padding-top: 1rem;
   width: 100%;
   margin: auto;
   font-size: smaller;
@@ -78,4 +109,13 @@ table tbody tr:nth-child(odd) {
   border-radius: 10px;
   background-color: rgb(237, 237, 237);
   z-index: 1;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,16 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=IBM+Plex+Mono:wght@300&display=swap");
+
 .container {
-  padding: 1rem;
   display: grid;
   place-items: center;
   gap: 5rem;
 
+  h1 {
+    font-size: 5rem;
+    font-family: "Space Grotesk", sans-serif;
+  }
+
   h3 {
+    font-family: "IBM Plex Mono", monospace;
     width: 36rem;
     z-index: 5;
   }
 
   i {
-    margin-top: 1rem;
     cursor: pointer;
     transition-duration: 0.2s;
 
