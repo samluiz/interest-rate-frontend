@@ -5,7 +5,7 @@
       <button mat-mini-fab color="basic" class="btn" [routerLink]="'/'">
         <i class="fa fa-university fa-lg" aria-hidden="true"></i>
       </button>
-      <span *ngIf="isOpen">IBM DASFN</span>
+      <span *ngIf="isOpen">SAURS</span>
     </div>
 
     <div class="links">
@@ -29,6 +29,7 @@
             color="basic"
             class="btn"
             [routerLink]="'/adicionar'"
+            (click)="sendFormType()"
           >
             <i class="fa fa-plus-square fa-lg" aria-hidden="true"></i>
           </button>

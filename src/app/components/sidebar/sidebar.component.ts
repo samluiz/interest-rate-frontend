@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormTypeService } from 'src/app/services/form-type.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,9 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent {
+  constructor(private type: FormTypeService) {}
+
   isOpen: boolean = false;
   width: string = '';
   transform: string = '';
+
+  sendFormType() {
+    this.type.sendType(false);
+  }
 
   toggleSidebar() {
     if (!this.isOpen) {
