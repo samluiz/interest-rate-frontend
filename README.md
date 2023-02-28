@@ -5,13 +5,13 @@ Single Page Application developed with Angular 15 performing CRUD operations on 
 ### Clone project
 
   ```
-  git clone https://github.com/samluiz/https://github.com/samluiz/interest-rate-frontend
+  git clone https://github.com/samluiz/interest-rate-frontend
   ```
   
 ### Enter in the project folder
 
   ```
-  cd TodoApp-Angular-Frontend
+  cd interest-rate-frontend
   ```
 
 ### Install the dependencies
@@ -34,13 +34,13 @@ Single Page Application desenvolvida com Angular 15 consumindo minha [API](https
 ### Clone o projeto
 
   ```
-  git clone https://github.com/samluiz/https://github.com/samluiz/interest-rate-frontend
+  git clone https://github.com/samluiz/interest-rate-frontend
   ```
   
 ### Entre no diretório do projeto
 
   ```
-  cd TodoApp-Angular-Frontend
+  cd interest-rate-frontend
   ```
 
 ### Instale as dependências
