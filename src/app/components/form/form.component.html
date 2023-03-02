@@ -1,36 +1,38 @@
 <form [formGroup]="group" (ngSubmit)="onSubmit()" #regForm="ngForm">
   <div class="container">
-    <mat-form-field class="field" appearance="fill">
-      <mat-label for="instituicao">Instituição financeira: </mat-label>
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
+      <mat-label for="instituicaoFinanceira"
+        >Instituição financeira:
+      </mat-label>
       <input
         matInput
-        id="instituicao"
+        id="instituicaoFinanceira"
         type="text"
-        formControlName="instituicao_financeira"
+        formControlName="instituicaoFinanceira"
         required
       />
       <mat-error
-        *ngIf="instituicao_financeira && instituicao_financeira.invalid"
+        *ngIf="instituicaoFinanceira && instituicaoFinanceira.invalid"
         >{{ notNullError }}</mat-error
       >
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
-      <mat-label for="cnpj">CNPJ: </mat-label>
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
+      <mat-label for="cnpj8">CNPJ: </mat-label>
       <input
         matInput
-        id="cnpj"
+        id="cnpj8"
         type="text"
-        formControlName="cnpj_8"
+        formControlName="cnpj8"
         maxlength="8"
         required
       />
-      <mat-error *ngIf="cnpj_8 && cnpj_8.invalid">{{
+      <mat-error *ngIf="cnpj8 && cnpj8.invalid">{{
         getCnpjErrorMessage()
       }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
       <mat-label for="modalidade">Modalidade: </mat-label>
       <input
         matInput
@@ -44,7 +46,7 @@
       }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
       <mat-label for="posicao">Posição: </mat-label>
       <input
         matInput
@@ -58,60 +60,67 @@
       }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
-      <mat-label for="taxa_ano">Taxa de juros ao ano: </mat-label>
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
+      <mat-label for="taxaJurosAno">Taxa de juros ao ano: </mat-label>
       <input
         matInput
-        id="taxa_ano"
+        id="taxaJurosAno"
         type="text"
-        formControlName="taxa_juros_ao_ano"
+        formControlName="taxaJurosAno"
         required
       />
-      <mat-error *ngIf="taxa_juros_ao_ano && taxa_juros_ao_ano.invalid">{{
+      <mat-error *ngIf="taxaJurosAno && taxaJurosAno.invalid">{{
         notNullError
       }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
-      <mat-label for="taxa_mes">Taxa de juros ao mês: </mat-label>
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
+      <mat-label for="taxaJurosMes">Taxa de juros ao mês: </mat-label>
       <input
         matInput
-        id="taxa_mes"
+        id="taxaJurosMes"
         type="text"
-        formControlName="taxa_juros_ao_mes"
+        formControlName="taxaJurosMes"
         required
       />
-      <mat-error *ngIf="taxa_juros_ao_mes && taxa_juros_ao_mes.invalid">{{
+      <mat-error *ngIf="taxaJurosMes && taxaJurosMes.invalid">{{
         notNullError
       }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="field" appearance="fill">
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
       <mat-label for="mes">Mês: </mat-label>
       <input
         matInput
         id="mes"
-        type="text"
+        type="number"
+        min="1"
+        max="12"
+        step="1"
         formControlName="mes"
         required
-        maxlength="8"
+        maxlength="2"
       />
       <mat-error *ngIf="mes && mes.invalid">{{
         getMesErrorMessage()
       }}</mat-error>
     </mat-form-field>
-    <mat-form-field class="field" appearance="fill">
-      <mat-label for="ano_mes">Ano-mês (yyyy-mm): </mat-label>
+    <mat-form-field hideRequiredMarker class="field" appearance="fill">
+      <mat-label for="ano">Ano: </mat-label>
       <input
         matInput
-        id="ano_mes"
-        type="text"
-        formControlName="ano_mes"
+        id="ano"
+        type="number"
+        min="1900"
+        max="{{ currentYear }}"
+        step="1"
+        formControlName="ano"
+        maxlength="4"
+        #date
         required
-        maxlength="7"
       />
-      <mat-error *ngIf="ano_mes && ano_mes.invalid">{{
-        getAnoMesErrorMessage()
+      <mat-error *ngIf="ano && ano.invalid">{{
+        getAnoErrorMessage()
       }}</mat-error>
     </mat-form-field>
     <div class="btn-wrap">

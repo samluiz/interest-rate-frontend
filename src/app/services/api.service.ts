@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const baseUrl = 'http://localhost:6868/api/taxaJurosMensal';
+// Development
+// const baseUrl = 'http://localhost/api/taxaJurosMensal';
+
+// Production
+const baseUrl = 'https://site-hbc3xbu7kq-ue.a.run.app/api/taxaJurosMensal';
 
 @Injectable({
   providedIn: 'root',

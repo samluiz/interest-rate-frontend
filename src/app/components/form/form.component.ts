@@ -3,12 +3,13 @@ import {
   EventEmitter,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
 import { FormTypeService } from 'src/app/services/form-type.service';
+import { DateUtil } from 'src/app/utils/date.util';
 
 @Component({
   selector: 'app-form',
@@ -20,13 +21,16 @@ export class FormComponent implements OnInit {
     private builder: FormBuilder,
     private service: ApiService,
     private click: GetUUIDService,
-    private type: FormTypeService
+    private type: FormTypeService,
+    private utils: DateUtil
   ) {}
 
   ngOnInit(): void {
     this.populateForm();
   }
 
+  currentYear: number = new Date().getFullYear();
+  currentMonth: number = new Date().getMonth() + 1;
   isEdit: boolean = false;
 
   @ViewChild('regForm', { static: false })
@@ -36,36 +40,28 @@ export class FormComponent implements OnInit {
   submit = new EventEmitter<any>();
 
   group = this.builder.group({
-    instituicao_financeira: ['', Validators.required],
-    cnpj_8: ['', [Validators.required, Validators.minLength(8)]],
+    instituicaoFinanceira: ['', Validators.required],
+    cnpj8: ['', [Validators.required, Validators.minLength(8)]],
     modalidade: ['', Validators.required],
     posicao: [null, Validators.required],
-    taxa_juros_ao_ano: [null, Validators.required],
-    taxa_juros_ao_mes: [null, Validators.required],
+    taxaJurosAno: [null, Validators.required],
+    taxaJurosMes: [null, Validators.required],
     mes: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern('^[a-zA-Z]{3}-\\d{4}'),
-      ],
+      this.currentMonth,
+      [Validators.required, Validators.maxLength(2), Validators.minLength(1)],
     ],
-    ano_mes: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern('\\d{4}-\\d{2}'),
-        Validators.minLength(7),
-      ],
+    ano: [
+      this.currentYear,
+      [Validators.required, Validators.maxLength(4), Validators.minLength(4)],
     ],
   });
 
-  get instituicao_financeira() {
-    return this.group.get('instituicao_financeira');
+  get instituicaoFinanceira() {
+    return this.group.get('instituicaoFinanceira');
   }
 
-  get cnpj_8() {
-    return this.group.get('cnpj_8');
+  get cnpj8() {
+    return this.group.get('cnpj8');
   }
 
   get modalidade() {
@@ -76,20 +72,20 @@ export class FormComponent implements OnInit {
     return this.group.get('posicao');
   }
 
-  get taxa_juros_ao_ano() {
-    return this.group.get('taxa_juros_ao_ano');
+  get taxaJurosAno() {
+    return this.group.get('taxaJurosAno');
   }
 
-  get taxa_juros_ao_mes() {
-    return this.group.get('taxa_juros_ao_mes');
+  get taxaJurosMes() {
+    return this.group.get('taxaJurosMes');
   }
 
   get mes() {
     return this.group.get('mes');
   }
 
-  get ano_mes() {
-    return this.group.get('ano_mes');
+  get ano() {
+    return this.group.get('ano');
   }
 
   labelInst: string = 'Instituição financeira';
@@ -103,22 +99,18 @@ export class FormComponent implements OnInit {
 
   notNullError: string = 'Este campo não pode ser nulo.';
 
-  length8Error: string = 'Este campo deve ter 8 dígitos.';
+  lengthCnpjError: string = 'Este campo deve ter 8 dígitos.';
 
-  length7Error: string = 'Este campo deve ter 7 dígitos.';
+  lengthMesError: string = 'Este campo deve ter no máximo 2 dígitos de 1 a 12.';
 
-  anoMesPatternError: string =
-    'Este campo deve estar no padrão yyyy-mm. ex: 2021-12';
-
-  mesPatternError: string =
-    'Este campo deve estar no padrão mmm-yyyy. ex: Ago-2022';
+  lengthAnoError: string = `Este campo deve ser um ano de 4 dígitos entre 1900 até ${this.currentYear}.`;
 
   getCnpjErrorMessage() {
-    if (this.cnpj_8?.hasError('required')) {
+    if (this.cnpj8?.hasError('required')) {
       return this.notNullError;
     }
 
-    return this.length8Error;
+    return this.lengthCnpjError;
   }
 
   getMesErrorMessage() {
@@ -126,19 +118,36 @@ export class FormComponent implements OnInit {
       return this.notNullError;
     }
 
-    return this.mesPatternError;
+    return this.lengthMesError;
   }
 
-  getAnoMesErrorMessage() {
-    if (this.ano_mes?.hasError('required')) {
+  getAnoErrorMessage() {
+    if (this.ano?.hasError('required')) {
       return this.notNullError;
     }
-    return this.anoMesPatternError;
+
+    return this.lengthAnoError;
   }
 
   onSubmit() {
     if (this.group.valid) {
-      this.submit.emit(this.group.value);
+      let mes: number = this.mes?.value!;
+      let ano: number = this.ano?.value!;
+      let mesAno: string = this.utils.convertMonthYear(mes, ano);
+      let anoMes: string = this.utils.convertYearMonth(mes, ano);
+      let data = {
+        instituicao_financeira: this.instituicaoFinanceira?.value,
+        cnpj_8: this.cnpj8?.value,
+        modalidade: this.modalidade?.value,
+        posicao: this.posicao?.value,
+        taxa_juros_ao_ano: this.taxaJurosAno?.value,
+        taxa_juros_ao_mes: this.taxaJurosMes?.value,
+        mes: mesAno,
+        ano_mes: anoMes,
+      };
+
+      console.log(data);
+      this.submit.emit(data);
       this.form.resetForm();
     }
   }
