@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
 
@@ -8,25 +9,31 @@ import { GetUUIDService } from 'src/app/services/click.service';
   styleUrls: ['./delete.component.scss'],
 })
 export class DeleteComponent {
-  constructor(private service: ApiService, private click: GetUUIDService) {}
+  constructor(
+    private service: ApiService,
+    private click: GetUUIDService,
+    private snackBar: MatSnackBar
+  ) {}
 
   @Output()
-  close = new EventEmitter<any>();
+  close = new EventEmitter<boolean>();
 
   @Output()
-  submit = new EventEmitter<any>();
+  submit = new EventEmitter<boolean>();
 
-  isOpen: boolean = false;
   uuid: string = '';
 
   onClose() {
-    this.isOpen = false;
-    this.close.emit(this.isOpen);
+    this.close.emit(false);
   }
 
   delete(uuid: string) {
     this.service.delete(uuid).subscribe({
-      next: () => this.submit.emit(true),
+      next: () => {
+        this.submit.emit(true);
+        this.onClose();
+        this.openSnackBar();
+      },
       error: (e) => {
         this.submit.emit(false);
         console.error(e);
@@ -39,5 +46,11 @@ export class DeleteComponent {
       this.uuid = uuid;
     });
     this.delete(this.uuid);
+  }
+
+  openSnackBar() {
+    this.snackBar.open('Registro removido com sucesso.', 'Fechar', {
+      duration: 3000,
+    });
   }
 }

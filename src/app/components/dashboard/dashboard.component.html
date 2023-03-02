@@ -55,6 +55,6 @@
     </div>
   </main>
   <app-modal *ngIf="isModalOpen" (close)="closeModal($event)">
-    <app-edit-form *ngIf="isEdit" (submit)="onUpdate($event)" />
+    <app-edit-form *ngIf="isEdit" (submit)="onUpdate($event)" (close)="closeModal($event)" />
     <app-delete *ngIf="isDelete" (submit)="onDelete($event)" (close)="closeModal($event)" />
   </app-modal>
