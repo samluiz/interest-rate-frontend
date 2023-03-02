@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class DateUtil {
   monthPrefixes: Array<string> = [
+    '',
     'Jan',
     'Fev',
     'Mar',
@@ -19,13 +20,17 @@ export class DateUtil {
     'Dez',
   ];
 
-  convertMonthYear(month: number, year: number) {
+  convertMonthYear(month: number, year: number): string {
     return `${this.monthPrefixes[month]}-${year}`;
+  }
+
+  getMonthNumber(monthPrefix: string): number {
+    return this.monthPrefixes.indexOf(monthPrefix);
   }
 
   convertYearMonth(month: number, year: number): string {
     let anoMes: string;
-    if (month.toString.length == 1) {
+    if (month.toString().length < 2) {
       anoMes = `${year}-0${month}`;
     } else {
       anoMes = `${year}-${month}`;

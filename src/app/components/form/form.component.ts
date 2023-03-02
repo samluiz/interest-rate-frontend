@@ -10,6 +10,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
 import { FormTypeService } from 'src/app/services/form-type.service';
 import { DateUtil } from 'src/app/utils/date.util';
+import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
 
 @Component({
   selector: 'app-form',
@@ -30,7 +31,7 @@ export class FormComponent implements OnInit {
   }
 
   currentYear: number = new Date().getFullYear();
-  currentMonth: number = new Date().getMonth() + 1;
+  currentMonth: number = new Date().getMonth();
   isEdit: boolean = false;
 
   @ViewChild('regForm', { static: false })
@@ -135,7 +136,7 @@ export class FormComponent implements OnInit {
       let ano: number = this.ano?.value!;
       let mesAno: string = this.utils.convertMonthYear(mes, ano);
       let anoMes: string = this.utils.convertYearMonth(mes, ano);
-      let data = {
+      let data: ICreditOperation = {
         instituicao_financeira: this.instituicaoFinanceira?.value,
         cnpj_8: this.cnpj8?.value,
         modalidade: this.modalidade?.value,
@@ -145,8 +146,6 @@ export class FormComponent implements OnInit {
         mes: mesAno,
         ano_mes: anoMes,
       };
-
-      console.log(data);
       this.submit.emit(data);
       this.form.resetForm();
     }
@@ -171,9 +170,18 @@ export class FormComponent implements OnInit {
     this.service.findByUUID(uuid).subscribe({
       next: (data: any) => {
         let { uuid, _links, ...rest } = data;
-        this.group.setValue(rest);
+        this.group.setValue({
+          instituicaoFinanceira: rest.instituicao_financeira,
+          cnpj8: rest.cnpj_8,
+          modalidade: rest.modalidade,
+          posicao: rest.posicao,
+          taxaJurosAno: rest.taxa_juros_ao_ano,
+          taxaJurosMes: rest.taxa_juros_ao_mes,
+          mes: this.utils.getMonthNumber(rest.mes.slice(0, 3)),
+          ano: rest.ano_mes.slice(0, 4),
+        });
       },
-      error: (e) => console.log(e),
+      error: (e) => console.error(e),
     });
   }
 }
