@@ -17,7 +17,6 @@ export class DeleteComponent {
   submit = new EventEmitter<any>();
 
   isOpen: boolean = false;
-  submitted: boolean = false;
   uuid: string = '';
 
   onClose() {
@@ -27,7 +26,11 @@ export class DeleteComponent {
 
   delete(uuid: string) {
     this.service.delete(uuid).subscribe({
-      error: (e) => console.error(e),
+      next: () => this.submit.emit(true),
+      error: (e) => {
+        this.submit.emit(false);
+        console.error(e);
+      },
     });
   }
 
@@ -36,8 +39,5 @@ export class DeleteComponent {
       this.uuid = uuid;
     });
     this.delete(this.uuid);
-    this.submitted = true;
-    this.submit.emit(this.submitted);
-    this.onClose();
   }
 }

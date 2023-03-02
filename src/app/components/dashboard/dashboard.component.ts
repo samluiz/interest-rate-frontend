@@ -1,6 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  ICreditOperation,
+  ICreditOperationResponse,
+} from 'src/app/interfaces/CreditOperationInterface';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
 import { FormTypeService } from 'src/app/services/form-type.service';
@@ -21,7 +25,7 @@ export class DashboardComponent implements OnInit {
     this.changed = new URL(this.url).searchParams.get('changed') === 'true';
   }
 
-  data: Array<any> = [];
+  data: Array<ICreditOperationResponse> = [];
   anoMesInput = new FormControl('');
   totalPages: number = 0;
   totalItems: number = 0;
@@ -71,11 +75,17 @@ export class DashboardComponent implements OnInit {
   }
 
   onDelete(isSubmitted: boolean) {
-    if (isSubmitted) setTimeout(() => this.reloadPage(), 100);
+    console.log(isSubmitted);
+    if (isSubmitted === true) {
+      this.reloadPage();
+    }
   }
 
   onUpdate(isSubmitted: boolean) {
-    if (isSubmitted) setTimeout(() => this.reloadPage(), 100);
+    console.log(isSubmitted);
+    if (isSubmitted === true) {
+      this.reloadPage();
+    }
   }
 
   closeModal(event: any) {

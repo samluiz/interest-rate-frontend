@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ICreditOperation } from '../interfaces/CreditOperationInterface';
 
 // Development
 // const baseUrl = 'http://localhost/api/taxaJurosMensal';
@@ -23,11 +24,11 @@ export class ApiService {
     return this.http.get(baseUrl + '/' + uuid);
   }
 
-  create(data: object) {
+  create(data: ICreditOperation) {
     return this.http.post(baseUrl, data);
   }
 
-  update(uuid: string, data: object) {
+  update(uuid: string, data: ICreditOperation) {
     return this.http.put(baseUrl + '/' + uuid, data);
   }
 

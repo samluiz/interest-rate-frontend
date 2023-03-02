@@ -1,12 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  Output
-} from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
+import { ValidateUtil } from 'src/app/utils/validate.util';
 
 @Component({
   selector: 'app-edit-form',
@@ -18,28 +16,31 @@ export class EditFormComponent {
   uuid: string = '';
 
   @Output()
-  submit = new EventEmitter<any>();
+  submit = new EventEmitter<boolean>();
 
   constructor(
     private service: ApiService,
     private snackBar: MatSnackBar,
-    private click: GetUUIDService
+    private click: GetUUIDService,
+    private validate: ValidateUtil
   ) {}
 
-  update(uuid: string, data: any) {
+  update(uuid: string, data: ICreditOperation) {
     this.service.update(uuid, data).subscribe({
-      next: () => this.openSnackBar(),
-      error: (e) => console.error(e),
+      next: () => this.submit.emit(true),
+      error: (e) => {
+        this.submit.emit(false);
+        console.error(e);
+      },
     });
   }
 
-  onSubmit(data: any) {
-    if (data.instituicao_financeira) {
+  onSubmit(data: ICreditOperation) {
+    if (this.validate.isValid(data)) {
       this.click.getUUID().subscribe((uuid) => {
         this.uuid = uuid;
       });
       this.update(this.uuid, data);
-      this.submit.emit(true);
     }
   }
 

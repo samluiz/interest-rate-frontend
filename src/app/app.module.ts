@@ -50,11 +50,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatButtonModule,
     MatSnackBarModule,
     MatSlideToggleModule,
-    RouterModule.forRoot([
-      { path: 'listar', component: ListComponent },
-      { path: '', component: HomeComponent },
-      { path: 'adicionar', component: AddComponent },
-    ]),
+    RouterModule.forRoot(
+      [
+        { path: '', component: HomeComponent },
+        { path: 'listar', component: ListComponent },
+        { path: 'adicionar', component: AddComponent },
+      ],
+      { useHash: true }
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

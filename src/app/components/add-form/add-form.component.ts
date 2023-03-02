@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
 import { ApiService } from 'src/app/services/api.service';
+import { ValidateUtil } from 'src/app/utils/validate.util';
 
 @Component({
   selector: 'app-add-form',
@@ -8,20 +10,21 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./add-form.component.scss'],
 })
 export class AddFormComponent {
-  constructor(private service: ApiService, private snackBar: MatSnackBar) {}
+  constructor(
+    private service: ApiService,
+    private snackBar: MatSnackBar,
+    private validate: ValidateUtil
+  ) {}
 
-  @Output()
-  index = new EventEmitter<any>();
-
-  create(data: any) {
+  create(data: ICreditOperation) {
     this.service.create(data).subscribe({
       next: () => this.openSnackBar(),
       error: (e) => console.error(e),
     });
   }
 
-  onSubmit(data: any) {
-    if (data.instituicao_financeira) {
+  onSubmit(data: ICreditOperation) {
+    if (this.validate.isValid(data)) {
       this.create(data);
     }
   }
