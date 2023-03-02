@@ -48,7 +48,7 @@ export class FormComponent implements OnInit {
     taxaJurosAno: [null, Validators.required],
     taxaJurosMes: [null, Validators.required],
     mes: [
-      this.currentMonth,
+      this.currentMonth < 12 ? this.currentMonth + 1 : this.currentMonth,
       [Validators.required, Validators.maxLength(2), Validators.minLength(1)],
     ],
     ano: [
