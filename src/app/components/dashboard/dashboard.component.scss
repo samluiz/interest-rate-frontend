@@ -42,7 +42,12 @@ button {
 button:hover {
   color: rgb(45, 45, 45);
   background: rgb(199, 199, 199);
-  border-radius: 50%;
+  border-radius: 100px;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
 }
 
 .input-ano-mes:disabled {
@@ -73,6 +78,7 @@ tbody {
 table td {
   padding: 0.4rem;
   height: 0.1rem;
+  text-align: center;
 }
 
 table thead td {
