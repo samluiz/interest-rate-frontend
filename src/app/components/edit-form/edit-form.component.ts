@@ -16,6 +16,9 @@ export class EditFormComponent {
   uuid: string = '';
 
   @Output()
+  close = new EventEmitter<any>();
+
+  @Output()
   submit = new EventEmitter<boolean>();
 
   constructor(
@@ -25,9 +28,17 @@ export class EditFormComponent {
     private validate: ValidateUtil
   ) {}
 
+  onClose() {
+    this.close.emit(false);
+  }
+
   update(uuid: string, data: ICreditOperation) {
     this.service.update(uuid, data).subscribe({
-      next: () => this.submit.emit(true),
+      next: () => {
+        this.submit.emit(true);
+        this.onClose();
+        this.openSnackBar();
+      },
       error: (e) => {
         this.submit.emit(false);
         console.error(e);

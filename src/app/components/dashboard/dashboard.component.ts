@@ -20,10 +20,7 @@ export class DashboardComponent implements OnInit {
     private service: ApiService,
     private click: GetUUIDService,
     private type: FormTypeService
-  ) {
-    this.url = window.location.href;
-    this.changed = new URL(this.url).searchParams.get('changed') === 'true';
-  }
+  ) {}
 
   data: Array<ICreditOperationResponse> = [];
   anoMesInput = new FormControl('');
@@ -32,10 +29,8 @@ export class DashboardComponent implements OnInit {
   size: number = 10;
   page: number = 0;
   anoMes: string = '';
-  url: string;
   uuid: string = '';
   index: number = 0;
-  changed: boolean = false;
   isEdit: boolean = false;
   isDelete: boolean = false;
   isModalOpen: boolean = false;
@@ -45,54 +40,39 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
-    if (this.changed) {
-      this.openSnackBar();
-    }
   }
 
   uncheck() {
     if (!this.isChecked) {
       this.anoMes = '';
-      this.fetchData();
     }
   }
 
-  onInputChange(event: string) {
-    if (event && event.length === 7 && event.match('\\d{4}-\\d{2}')) {
-      this.anoMes = event;
+  onInputChange(query: string) {
+    if (query && query.length === 7 && query.match('\\d{4}-\\d{2}')) {
+      this.anoMes = query;
       this.page = 0;
       this.fetchData();
     }
   }
 
-  reloadPage() {
-    if (new URL(this.url).searchParams.has('changed')) {
-      window.location.reload();
-    }
-    if (!this.changed) {
-      window.location.href = this.url + '?changed=true';
-    }
-  }
-
   onDelete(isSubmitted: boolean) {
-    console.log(isSubmitted);
     if (isSubmitted === true) {
-      this.reloadPage();
+      this.fetchData();
     }
   }
 
   onUpdate(isSubmitted: boolean) {
-    console.log(isSubmitted);
     if (isSubmitted === true) {
-      this.reloadPage();
+      this.fetchData();
     }
   }
 
-  closeModal(event: any) {
+  closeModal(isOpen: any) {
     if (this.isModalOpen) {
-      this.isEdit = event.isOpen;
-      this.isDelete = event.isOpen;
-      this.isModalOpen = event.isOpen;
+      this.isEdit = false;
+      this.isDelete = isOpen;
+      this.isModalOpen = isOpen;
       this.type.sendType(this.isEdit);
     }
   }
