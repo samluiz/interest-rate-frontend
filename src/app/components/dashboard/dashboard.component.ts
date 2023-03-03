@@ -34,18 +34,8 @@ export class DashboardComponent implements OnInit {
   isDelete: boolean = false;
   isModalOpen: boolean = false;
 
-  @Input()
-  isChecked: boolean = false;
-
   ngOnInit(): void {
     this.fetchData();
-  }
-
-  uncheck() {
-    if (!this.isChecked) {
-      this.anoMes = '';
-      this.fetchData();
-    }
   }
 
   selectSize(e: string) {
