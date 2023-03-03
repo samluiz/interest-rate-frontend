@@ -16,7 +16,6 @@ import { FormTypeService } from 'src/app/services/form-type.service';
 })
 export class DashboardComponent implements OnInit {
   constructor(
-    private snackBar: MatSnackBar,
     private service: ApiService,
     private click: GetUUIDService,
     private type: FormTypeService
@@ -30,7 +29,7 @@ export class DashboardComponent implements OnInit {
   page: number = 0;
   anoMes: string = '';
   uuid: string = '';
-  index: number = 0;
+  isFiltered: boolean = false;
   isEdit: boolean = false;
   isDelete: boolean = false;
   isModalOpen: boolean = false;
@@ -45,14 +44,37 @@ export class DashboardComponent implements OnInit {
   uncheck() {
     if (!this.isChecked) {
       this.anoMes = '';
+      this.fetchData();
     }
+  }
+
+  selectSize(e: string) {
+    if (this.size !== Number(e)) {
+      this.size = Number(e);
+      this.fetchData();
+    }
+  }
+
+  filter(query: string) {
+    this.anoMes = query;
+    this.page = 0;
+    this.isFiltered = true;
+    this.fetchData();
+  }
+
+  clearFilter() {
+    this.anoMes = '';
+    this.page = 0;
+    this.isFiltered = false;
+    this.fetchData();
   }
 
   onInputChange(query: string) {
     if (query && query.length === 7 && query.match('\\d{4}-\\d{2}')) {
-      this.anoMes = query;
-      this.page = 0;
-      this.fetchData();
+      this.filter(query);
+    }
+    if (this.isFiltered && query.length === 6) {
+      this.clearFilter();
     }
   }
 
@@ -106,11 +128,5 @@ export class DashboardComponent implements OnInit {
   renderPage(event: number) {
     this.page = event;
     this.fetchData();
-  }
-
-  openSnackBar() {
-    this.snackBar.open('Operação concluída com sucesso.', 'Fechar', {
-      duration: 3000,
-    });
   }
 }

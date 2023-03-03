@@ -1,12 +1,20 @@
 <div class="overlay" *ngIf="isModalOpen" ></div>
 <app-sidebar />
  <main>
-   <div class="position-slide">
-     <div class="search">
-       <mat-slide-toggle (click)="uncheck()" [(ngModel)]="isChecked" #slider>Filtrar por ano-mês?</mat-slide-toggle>
-       <input ngModel name="anoMesInput" value="{{slider.checked ? anoMesInput.value : anoMesInput.setValue('')}}" (ngModelChange)="onInputChange($event)" type="text" disabled="{{!slider.checked}}" class="input-ano-mes" placeholder="ex: 2022-12">
-     </div>
-   </div>
+  <div class="filters">
+      <div class="search">
+        <mat-slide-toggle (click)="uncheck()" [(ngModel)]="isChecked" #slider>Filtrar por ano-mês?</mat-slide-toggle>
+        <input ngModel maxlength="7" name="anoMesInput" value="{{slider.checked ? anoMesInput.value : anoMesInput.setValue('')}}" (ngModelChange)="onInputChange($event)" type="text" disabled="{{!slider.checked}}" class="input-ano-mes" placeholder="ex: 2022-12">
+      </div>
+      <div class="dropdown">
+        <span>Itens por página: </span>
+        <select #t (change)="selectSize(t.value)" name="size" id="size">
+          <option value="5">5</option>
+          <option value="10" selected>10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+  </div>
    <table>
      <thead>
        <tr>

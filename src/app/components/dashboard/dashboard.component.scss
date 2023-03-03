@@ -16,15 +16,40 @@ pagination-controls {
   }
 }
 
-.position-slide {
+.filters {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  @media screen and (max-width: $small) {
+    flex-direction: column;
+  }
+}
+
+.dropdown {
+  width: fit-content;
+  position: absolute;
+  right: 1rem;
+  display: grid;
+  place-items: center;
+  grid-auto-flow: row;
+  gap: 0.5rem;
+  font-size: small;
+
+  @media screen and (max-width: $small) {
+    font-size: x-small;
+    position: unset;
+  }
 }
 
 .search {
   display: grid;
   place-items: center;
-  font-size: smaller;
+  grid-auto-flow: row;
   gap: 1rem;
+  font-size: smaller;
 
   input {
     padding: 0.5rem;
@@ -118,6 +143,27 @@ table tbody tr:nth-child(odd) {
   border-radius: 10px;
   background-color: rgb(237, 237, 237);
   z-index: 1;
+}
+
+select {
+  border: 0;
+  outline: 0;
+  width: 4em;
+  height: 2.5em;
+  color: black;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  option {
+    color: black;
+    background-color: $option;
+  }
+  &:focus {
+    outline: none;
+  }
+  &::-ms-expand {
+    display: none;
+  }
 }
 
 @keyframes fadeIn {
