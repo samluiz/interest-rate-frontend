@@ -96,15 +96,18 @@ export class FormComponent implements OnInit {
     return this.group.get('ano');
   }
 
+  invalidChars: Array<string> = ['-', '+', 'e'];
+
   validateNumbers(e: KeyboardEvent) {
-    let invalidChars: Array<string> = ['-', '+', 'e'];
-    if (invalidChars.includes(e.key)) {
+    if (this.invalidChars.includes(e.key)) {
       e.preventDefault();
     }
   }
 
   replaceInvalid(e: any) {
-    e.target.value = e.target.value.toString().replace(/[e\+\-]/gi, '');
+    if (this.invalidChars.includes(e.key)) {
+      e.target.value = e.target.value.replace(/[e\+\-]/gi, '');
+    }
   }
 
   labelInst: string = 'Instituição financeira';
