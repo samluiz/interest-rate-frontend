@@ -42,9 +42,16 @@ export class FormComponent implements OnInit {
 
   group = this.builder.group({
     instituicaoFinanceira: ['', Validators.required],
-    cnpj8: ['', [Validators.required, Validators.minLength(8)]],
+    cnpj8: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern('^[0-9]*$'),
+      ],
+    ],
     modalidade: ['', Validators.required],
-    posicao: [null, Validators.required],
+    posicao: [null, Validators.required, ,],
     taxaJurosAno: [null, Validators.required],
     taxaJurosMes: [null, Validators.required],
     mes: [
@@ -89,6 +96,17 @@ export class FormComponent implements OnInit {
     return this.group.get('ano');
   }
 
+  validateNumbers(e: KeyboardEvent) {
+    let invalidChars: Array<string> = ['-', '+', 'e'];
+    if (invalidChars.includes(e.key)) {
+      e.preventDefault();
+    }
+  }
+
+  replaceInvalid(e: any) {
+    e.target.value = e.target.value.toString().replace(/[e\+\-]/gi, '');
+  }
+
   labelInst: string = 'Instituição financeira';
   labelCnpj_8: string = 'CNPJ_8';
   labelModalidade: string = 'Modalidade';
@@ -99,19 +117,31 @@ export class FormComponent implements OnInit {
   labelAnoMes: string = 'Ano-mês';
 
   notNullError: string = 'Este campo não pode ser nulo.';
-
   lengthCnpjError: string = 'Este campo deve ter 8 dígitos.';
-
   lengthMesError: string = 'Este campo deve ter no máximo 2 dígitos de 1 a 12.';
-
   lengthAnoError: string = `Este campo deve ser um ano de 4 dígitos entre 1900 até ${this.currentYear}.`;
+  mustBeNumberError: string = 'Este campo não pode conter letras.';
 
   getCnpjErrorMessage() {
     if (this.cnpj8?.hasError('required')) {
       return this.notNullError;
+    } else if (this.cnpj8?.hasError('pattern')) {
+      return this.mustBeNumberError;
     }
 
     return this.lengthCnpjError;
+  }
+
+  getPosicaoErrorMessage() {
+    return this.notNullError;
+  }
+
+  getTaxaAnoErrorMessage() {
+    return this.notNullError;
+  }
+
+  getTaxaMesErrorMessage() {
+    return this.notNullError;
   }
 
   getMesErrorMessage() {
