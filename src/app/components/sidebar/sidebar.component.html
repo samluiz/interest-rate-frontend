@@ -2,10 +2,15 @@
 <div class="sidebar" [style.width]="width">
   <div class="content">
     <div class="wrapper">
-      <button mat-mini-fab color="basic" class="btn" [routerLink]="'/'">
+      <button
+        mat-mini-fab
+        color="basic"
+        class="btn home-btn"
+        [routerLink]="'/'"
+      >
         <i class="fa fa-university fa-lg" aria-hidden="true"></i>
       </button>
-      <span *ngIf="isOpen">SAURS</span>
+      <span *ngIf="isOpen">IBM DASFN</span>
     </div>
 
     <div class="links">
@@ -37,7 +42,12 @@
         <span *ngIf="isOpen">ADICIONAR</span>
       </div>
     </div>
-    <button mat-mini-fab color="basic" class="btn" (click)="toggleSidebar()">
+    <button
+      mat-mini-fab
+      color="basic"
+      class="btn back-btn"
+      (click)="toggleSidebar()"
+    >
       <i
         class="fa fa-chevron-circle-right fa-lg open"
         aria-hidden="true"
