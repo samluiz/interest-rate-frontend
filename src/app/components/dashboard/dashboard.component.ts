@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-  ICreditOperationResponse
-} from 'src/app/interfaces/CreditOperationInterface';
+import { ICreditOperationResponse } from 'src/app/interfaces/CreditOperationInterface';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
 import { FormTypeService } from 'src/app/services/form-type.service';

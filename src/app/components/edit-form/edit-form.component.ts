@@ -2,9 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
+import { ISubmitted } from 'src/app/interfaces/SubmitInterface';
 import { ApiService } from 'src/app/services/api.service';
 import { GetUUIDService } from 'src/app/services/click.service';
-import { ValidateUtil } from 'src/app/utils/validate.util';
 
 @Component({
   selector: 'app-edit-form',
@@ -24,8 +24,7 @@ export class EditFormComponent {
   constructor(
     private service: ApiService,
     private snackBar: MatSnackBar,
-    private click: GetUUIDService,
-    private validate: ValidateUtil
+    private click: GetUUIDService
   ) {}
 
   onClose() {
@@ -46,12 +45,12 @@ export class EditFormComponent {
     });
   }
 
-  onSubmit(data: ICreditOperation) {
-    if (this.validate.isValid(data)) {
+  onSubmit(data: ISubmitted) {
+    if (data.isValid) {
       this.click.getUUID().subscribe((uuid) => {
         this.uuid = uuid;
       });
-      this.update(this.uuid, data);
+      this.update(this.uuid, data.data);
     }
   }
 
