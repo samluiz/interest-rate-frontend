@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +22,10 @@ import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerService } from './services/spinner.service';
+import { SpinnerInterceptor } from './interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     EditFormComponent,
     ModalComponent,
     DeleteComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatButtonModule,
     MatSnackBarModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
     RouterModule.forRoot(
       [
         { path: '', component: HomeComponent },
@@ -59,7 +65,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       { useHash: true }
     ),
   ],
-  providers: [],
+  providers: [
+    SpinnerService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

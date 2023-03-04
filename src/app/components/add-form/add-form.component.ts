@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
 import { ApiService } from 'src/app/services/api.service';
