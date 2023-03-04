@@ -27,7 +27,9 @@ export class FormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.populateForm();
+    if (!/adicionar/.test(window.location.href)) {
+      this.populateForm();
+    }
   }
 
   currentYear: number = new Date().getFullYear();
