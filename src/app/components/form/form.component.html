@@ -50,10 +50,8 @@
       <mat-label for="posicao">Posição: </mat-label>
       <input
         matInput
-        (keydown)="validateNumbers($event)"
-        (input)="replaceInvalid($event)"
         id="posicao"
-        type="number"
+        type="text"
         formControlName="posicao"
         required
       />
@@ -66,10 +64,8 @@
       <mat-label for="taxaJurosAno">Taxa de juros ao ano: </mat-label>
       <input
         matInput
-        (keydown)="validateNumbers($event)"
-        (input)="replaceInvalid($event)"
         id="taxaJurosAno"
-        type="number"
+        type="text"
         formControlName="taxaJurosAno"
         required
       />
@@ -82,10 +78,8 @@
       <mat-label for="taxaJurosMes">Taxa de juros ao mês: </mat-label>
       <input
         matInput
-        (keydown)="validateNumbers($event)"
-        (input)="replaceInvalid($event)"
         id="taxaJurosMes"
-        type="number"
+        type="text"
         formControlName="taxaJurosMes"
         required
       />

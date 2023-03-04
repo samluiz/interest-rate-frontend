@@ -51,9 +51,9 @@ export class FormComponent implements OnInit {
       ],
     ],
     modalidade: ['', Validators.required],
-    posicao: [null, Validators.required, ,],
-    taxaJurosAno: [null, Validators.required],
-    taxaJurosMes: [null, Validators.required],
+    posicao: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    taxaJurosAno: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    taxaJurosMes: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
     mes: [
       this.currentMonth < 12 ? this.currentMonth + 1 : this.currentMonth,
       [Validators.required, Validators.maxLength(2), Validators.minLength(1)],
@@ -96,7 +96,7 @@ export class FormComponent implements OnInit {
     return this.group.get('ano');
   }
 
-  invalidChars: Array<string> = ['-', '+', 'e'];
+  invalidChars: Array<string> = ['-', '+', 'e', '.'];
 
   validateNumbers(e: KeyboardEvent) {
     if (this.invalidChars.includes(e.key)) {
@@ -105,9 +105,7 @@ export class FormComponent implements OnInit {
   }
 
   replaceInvalid(e: any) {
-    if (this.invalidChars.includes(e.key)) {
-      e.target.value = e.target.value.replace(/[e\+\-]/gi, '');
-    }
+    e.target.value = e.target.value.replace(/[e\+\-\.]/gi, '');
   }
 
   labelInst: string = 'Instituição financeira';
@@ -128,7 +126,8 @@ export class FormComponent implements OnInit {
   getCnpjErrorMessage() {
     if (this.cnpj8?.hasError('required')) {
       return this.notNullError;
-    } else if (this.cnpj8?.hasError('pattern')) {
+    }
+    if (this.cnpj8?.hasError('pattern')) {
       return this.mustBeNumberError;
     }
 
@@ -136,14 +135,26 @@ export class FormComponent implements OnInit {
   }
 
   getPosicaoErrorMessage() {
-    return this.notNullError;
+    if (this.posicao?.hasError('pattern')) {
+      return this.mustBeNumberError;
+    }
+
+    return this.mustBeNumberError;
   }
 
   getTaxaAnoErrorMessage() {
-    return this.notNullError;
+    if (this.taxaJurosAno?.hasError('pattern')) {
+      return this.mustBeNumberError;
+    }
+
+    return this.mustBeNumberError;
   }
 
   getTaxaMesErrorMessage() {
+    if (this.taxaJurosMes?.hasError('pattern')) {
+      return this.mustBeNumberError;
+    }
+
     return this.notNullError;
   }
 
