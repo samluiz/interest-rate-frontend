@@ -53,9 +53,18 @@ export class FormComponent implements OnInit {
       ],
     ],
     modalidade: ['', Validators.required],
-    posicao: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-    taxaJurosAno: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
-    taxaJurosMes: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
+    posicao: [
+      null,
+      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+    ],
+    taxaJurosAno: [
+      null,
+      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+    ],
+    taxaJurosMes: [
+      null,
+      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+    ],
     mes: [
       this.currentMonth < 12 ? this.currentMonth + 1 : this.currentMonth,
       [Validators.required, Validators.maxLength(2), Validators.minLength(1)],
