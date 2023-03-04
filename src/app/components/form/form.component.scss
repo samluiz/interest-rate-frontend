@@ -8,16 +8,16 @@ form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 1.5rem;
 
   @media screen and (max-width: $large) {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0.3rem;
+    gap: 1.2rem;
   }
 
   @media screen and (max-width: $medium) {
     grid-template-columns: repeat(1, 1fr);
-    gap: 0;
+    gap: 1.2rem;
   }
 }
 
@@ -25,6 +25,9 @@ mat-label,
 mat-error {
   font-size: smaller;
   text-overflow: ellipsis;
+  @media screen and (max-width: $medium) {
+    font-size: x-small;
+  }
 }
 
 button {

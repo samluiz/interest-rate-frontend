@@ -11,6 +11,7 @@ import { GetUUIDService } from 'src/app/services/click.service';
 import { FormTypeService } from 'src/app/services/form-type.service';
 import { DateUtil } from 'src/app/utils/date.util';
 import { ICreditOperation } from 'src/app/interfaces/CreditOperationInterface';
+import { ISubmitted } from 'src/app/interfaces/SubmitInterface';
 
 @Component({
   selector: 'app-form',
@@ -40,7 +41,7 @@ export class FormComponent implements OnInit {
   form!: NgForm;
 
   @Output()
-  submit = new EventEmitter<any>();
+  submit = new EventEmitter<ISubmitted>();
 
   group = this.builder.group({
     instituicaoFinanceira: ['', Validators.required],
@@ -55,15 +56,15 @@ export class FormComponent implements OnInit {
     modalidade: ['', Validators.required],
     posicao: [
       null,
-      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+      [Validators.required, Validators.pattern('^[0-9]*$|^[0-9]*\\.?[0-9]*$')],
     ],
     taxaJurosAno: [
       null,
-      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+      [Validators.required, Validators.pattern('^[0-9]*$|^[0-9]*\\.?[0-9]*$')],
     ],
     taxaJurosMes: [
       null,
-      [Validators.required, Validators.pattern('^[0-9]*\\.?[0-9]*$')],
+      [Validators.required, Validators.pattern('^[0-9]*$|^[0-9]*\\.?[0-9]*$')],
     ],
     mes: [
       this.currentMonth < 12 ? this.currentMonth + 1 : this.currentMonth,
@@ -132,7 +133,7 @@ export class FormComponent implements OnInit {
   lengthCnpjError: string = 'Este campo deve ter 8 dígitos.';
   lengthMesError: string = 'Este campo deve ter no máximo 2 dígitos de 1 a 12.';
   lengthAnoError: string = `Este campo deve ser um ano de 4 dígitos entre 1900 até ${this.currentYear}.`;
-  mustBeNumberError: string = 'Este campo não pode conter letras.';
+  mustBeNumberError: string = 'Este campo é numérico.';
 
   getCnpjErrorMessage() {
     if (this.cnpj8?.hasError('required')) {
@@ -150,7 +151,7 @@ export class FormComponent implements OnInit {
       return this.mustBeNumberError;
     }
 
-    return this.mustBeNumberError;
+    return this.notNullError;
   }
 
   getTaxaAnoErrorMessage() {
@@ -158,7 +159,7 @@ export class FormComponent implements OnInit {
       return this.mustBeNumberError;
     }
 
-    return this.mustBeNumberError;
+    return this.notNullError;
   }
 
   getTaxaMesErrorMessage() {
@@ -201,8 +202,23 @@ export class FormComponent implements OnInit {
         mes: mesAno,
         ano_mes: anoMes,
       };
-      this.submit.emit(data);
+      this.submit.emit({ data, isValid: true });
       this.form.resetForm();
+      this.group.reset();
+    } else {
+      this.submit.emit({
+        data: {
+          instituicao_financeira: '',
+          cnpj_8: '',
+          modalidade: '',
+          posicao: null,
+          taxa_juros_ao_ano: null,
+          taxa_juros_ao_mes: null,
+          mes: '',
+          ano_mes: '',
+        },
+        isValid: false,
+      });
     }
   }
 
