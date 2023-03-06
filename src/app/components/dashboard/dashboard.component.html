@@ -15,7 +15,10 @@
         </select>
       </div>
   </div>
-   <table>
+  <div class="no-data" *ngIf="data.length < 1">
+    <i class="fa fa-database" aria-hidden="true"></i><span>Não há dados para exibir</span>
+  </div>
+   <table *ngIf="data.length > 0">
      <thead>
        <tr>
          <th>Instituição financeira</th>
