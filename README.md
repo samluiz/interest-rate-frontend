@@ -1,5 +1,8 @@
 # SAURS - DASFN
 
+![image](https://github.com/samluiz/interest-rate-frontend/assets/97702597/921168a9-25b9-49c0-827a-0140ce9e1d7b)
+
+
 Single Page Application developed with Angular 15 performing CRUD operations on my interest rate [API](https://github.com/samluiz/interest-rate-api).
 
 ### Clone project
