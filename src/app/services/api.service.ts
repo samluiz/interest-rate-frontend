@@ -6,7 +6,7 @@ import { ICreditOperation } from '../interfaces/CreditOperationInterface';
 // const baseUrl = 'http://localhost/api/taxaJurosMensal';
 
 // Production
-const baseUrl = 'https://site-hbc3xbu7kq-ue.a.run.app/api/taxaJurosMensal';
+const baseUrl = 'https://interest-rate-api.onrender.com/api/taxaJurosMensal';
 
 @Injectable({
   providedIn: 'root',
