@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
     if (query && query.length === 7 && query.match('\\d{4}-\\d{2}')) {
       this.filter(query);
     }
-    if (this.isFiltered && query.length === 6) {
+    if (this.isFiltered && query.length < 7) {
       this.clearFilter();
     }
   }
