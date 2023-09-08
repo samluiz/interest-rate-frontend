@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { ICreditOperation } from '../interfaces/CreditOperationInterface';
 
-// Development
-// const baseUrl = 'http://localhost/api/taxaJurosMensal';
+let baseUrl = '';
 
-// Production
-const baseUrl = 'https://interest-rate-api.onrender.com/api/taxaJurosMensal';
+if (isDevMode()) {
+  baseUrl = 'http://localhost/api/taxaJurosMensal';
+} else {
+  baseUrl = 'https://interest-rate-api-saurs.koyeb.app/api/taxaJurosMensal';
+}
 
 @Injectable({
   providedIn: 'root',
