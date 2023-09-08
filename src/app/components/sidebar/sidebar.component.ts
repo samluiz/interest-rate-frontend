@@ -20,7 +20,7 @@ export class SidebarComponent {
   toggleSidebar() {
     if (!this.isOpen) {
       this.isOpen = true;
-      this.width = '20%';
+      this.width = '10%';
       this.transform = 'rotate(180deg)';
     } else {
       this.isOpen = false;
